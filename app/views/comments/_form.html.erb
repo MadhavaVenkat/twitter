@@ -1,0 +1,11 @@
+<%= form_with model: [ @tweet, @tweet.comments.build ] do |form| %>
+  <p>
+  
+    <%= form.label :comment %>:
+    <%= form.text_field :comment  %>
+  
+  </p>
+  
+    <%= form.submit "post a comment",class: "btn btn-outline-primary" %>
+  </p>
+<% end %>

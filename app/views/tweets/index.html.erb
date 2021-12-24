@@ -1,0 +1,54 @@
+<div class = "container-fluid text-center mb-3">
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Tweets</h1>
+
+
+<table>
+  <thead>
+    
+  </thead>
+
+  <tbody>
+    <% @tweets.each do |tweet| %>
+      <div class = "container">
+      <div class="card border-dark mb-3 bg-light" > 
+      <%if tweet.user == current_user %>
+        <div class="card-header bg-transparent border-success">Tweet by You !</div>
+      <%else%>
+        <div class="card-header bg-transparent border-success">Tweet by <%= "#{tweet.user.email.match(/^\s*[A-Z]+/i)}".upcase %> !</div>
+      <%end%>
+      <div class="card-body text-secondary">
+        <h5 class="card-title"><%= tweet.tweet %></h5>
+        <p class="card-text"> Comments: <%= tweet.comments.count %> </p>
+      </div>
+      <div class="card-footer bg-transparent border-success">
+        <%if user_signed_in? %>
+          <%= link_to 'Retweet', tweets_retweet_path(id: tweet.id) ,class: "btn btn-outline-primary" %>
+        <%end%>
+
+        <%= link_to 'Show', tweet, class: "btn btn-outline-info" %>
+
+        <%if user_signed_in? and current_user == tweet.user%>
+          <%= link_to 'Edit', edit_tweet_path(tweet) ,class: "btn btn-outline-secondary" %>
+          <%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
+        <%end%>
+      
+      </div>
+      </div>
+      
+      </div>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if user_signed_in? %>
+<%= link_to 'Click here to create New Tweet', new_tweet_path %>
+<%end%>
+
+</div>
+

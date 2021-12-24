@@ -1,0 +1,14 @@
+<div class="container text-center">
+<div class="card border-dark mb-3 bg-light" >
+<div class="card-header bg-transparent border-dark">
+<h1>Editing Tweet</h1>
+</div>
+<div class="card-body text-secondary">
+<%= render 'form', tweet: @tweet %>
+</div>
+<div class="card-footer bg-transparent border-dark">
+<%= link_to 'Show', @tweet %> |
+<%= link_to 'Back', tweets_path %>
+</div>
+</div>
+</div>

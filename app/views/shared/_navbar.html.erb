@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  
+  <%= link_to 'Tweets', tweets_path , class: "navbar-brand text-primary"%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+      <% if user_signed_in? %>
+
+        <li class="nav-item text-primary">
+           <%= link_to 'sign out', destroy_user_session_path, method: :delete , class: "nav-link text-white" %> 
+        </li>
+
+        <li class="nav-item">
+            <%= link_to 'Edit Profile', edit_user_registration_path , class: "nav-link text-white"%>
+        </li>
+
+        <li class="nav-item"> 
+           <%= link_to 'New Tweet', new_tweet_path , class: "nav-link text-white"%>
+        </li>
+
+      <% else %>
+        <li class="nav-item active">
+            <%= link_to 'sign Up!', new_user_registration_path, class: "nav-link text-white"%>
+        </li>
+
+        <li class="nav-item active">
+            <%= link_to 'sign in', new_user_session_path, class: "nav-link text-white"%>
+        </li>
+      <%end%>
+
+    </ul>
+
+    <div>
+      <% if user_signed_in? %>
+        <p class = "text-white" > Hi! <%= "#{current_user.email.match(/^\s*[A-Z]+/i)}".upcase %> </p>
+      <% end %>
+    </div>
+    
+  </div>
+</nav>

@@ -1,0 +1,35 @@
+<div class="container text-center">
+<p id="notice"><%= notice %></p>
+
+<div class="card border-success mb-3 bg-light" > 
+    <%if @tweet.user == current_user %>
+      <div class="card-header bg-transparent border-success"> <strong>Tweet:</strong>
+        <%= @tweet.tweet %> [Form You !]
+        <%= link_to 'Edit', edit_tweet_path(@tweet),class: "btn btn-outline-secondary" %> 
+        <%= link_to 'Back', tweets_path ,class: "btn btn-outline-dark" %>
+      </div>
+        
+    <%else%>
+      <div class="card-header bg-transparent border-success"><strong>Tweet:</strong>
+       <%= @tweet.tweet %> [From <%= "#{@tweet.user.email.match(/^\s*[A-Z]+/i)}".upcase %> !]
+       <%= link_to 'Edit', edit_tweet_path(@tweet) ,class: "btn btn-outline-secondary" %> 
+       <%= link_to 'Back', tweets_path ,class: "btn btn-outline-dark" %>
+      </div>
+    <%end%>
+    <div class="card-body text-secondary">
+      <h5 class="card-title">Comments</h5>
+      <p class="card-text"> 
+        <% @tweet.comments.each do |comment| %>
+          <p>
+            <strong><%= "#{comment.user.email.match(/^\s*[A-Z]+/i)}".upcase %>: <%= comment.comment %></strong>
+          </p>
+        <% end %>
+      </p>
+    </div>
+    <div class="card-footer bg-transparent border-success">
+      <%= render 'comments/form' %> 
+    </div>
+</div>
+
+
+
